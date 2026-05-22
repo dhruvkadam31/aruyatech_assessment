@@ -1,14 +1,25 @@
-import React from 'react';
-import Sidebar from '../components/layout/SideBar';
+import Sidebar from "../components/layout/SideBar";
+import Listing from "./Listings";
 
 function Dashboard() {
   return (
+    <div className="flex h-screen">
 
-    <div className="dashboard">
-      <h1>Dashboard</h1>
-          <Sidebar />
+      {/* Sidebar */}
+      <Sidebar />
 
-      <p>Welcome to the dashboard! Here you can find an overview of your data and activities.</p>
+      {/* Main Content */}
+      <div className="flex-1 bg-white overflow-y-auto">
+
+        <div className="py-6 px-4 border-b border-gray-300">
+          <p className="text-sm text-gray-500">
+            Admin Portal
+          </p>
+        </div>
+
+          <Listing/>
+      </div>
+
     </div>
   );
 }
