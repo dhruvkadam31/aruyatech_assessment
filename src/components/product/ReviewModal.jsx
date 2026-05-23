@@ -82,8 +82,14 @@ function ReviewModal({
 
               <button
                 key={item}
+                type="button"
                 onClick={() => setReason(item)}
-                className="px-3 py-2 rounded-full border border-gray-200 bg-gray-50 text-xs text-gray-600 hover:bg-gray-100 transition-colors"
+                aria-pressed={reason === item}
+                className={`px-3 py-2 rounded-full text-xs transition-colors ${
+                  reason === item
+                    ? "border border-yellow-500 bg-yellow-500 text-white"
+                    : "border border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100"
+                }`}
               >
                 {item}
               </button>

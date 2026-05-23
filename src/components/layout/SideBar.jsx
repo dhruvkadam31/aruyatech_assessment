@@ -34,7 +34,7 @@ function Sidebar() {
               to="/"
               className={
                 onboardingActive
-                  ? "block px-4 py-2 rounded-lg mb-2 text-yellow-500 border border-yellow-500 bg-gradient-to-r from-[#0b0f10] to-transparent p-6 rounded-xl text-white"
+                  ? "block px-4 py-2 rounded-lg mb-2 text-yellow-500 border border-yellow-500 bg-gradient-to-r from-[#0b0f10] to-transparent"
                   : "block px-4 py-2 rounded-lg mb-2 text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
               }
             >

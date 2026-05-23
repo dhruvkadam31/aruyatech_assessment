@@ -1,4 +1,4 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import ProductHeader from "../components/product/ProductHeader";
@@ -10,7 +10,12 @@ import ReviewModal from "../components/product/ReviewModal";
 
 function ProductView() {
   const location = useLocation();
-  const { name, phone, shopName, type, title } = location.state || {};
+
+  if (!location.state) {
+    return <Navigate to="/" replace />;
+  }
+
+  const { name, phone, shopName, type, title } = location.state;
   const [reviewOpen, setReviewOpen] = useState(false);
   const [reviewType, setReviewType] = useState("approve");
 

@@ -22,22 +22,25 @@ function Listings() {
           </p>
         </div>
 
-        <button className="flex items-center gap-2 text-purple-600 text-sm font-medium hover:text-purple-800 whitespace-nowrap">
+        <button
+          type="button"
+          onClick={() => window.location.reload()}
+          className="flex items-center gap-2 text-purple-600 text-sm font-medium hover:text-purple-800 whitespace-nowrap"
+        >
           <RefreshCcw className="w-4 h-4" />
           Refresh
         </button>
       </div>
 
-        <div className="flex justify-between items-center border-b border-gray-200 ">
+      <div className="flex justify-between items-center border-b border-gray-200 ">
 
-        {/* Tabs */}
         <div className="flex gap-6 text-sm font-medium">
 
             <button
             onClick={() => setActiveTab("new")}
             className={`pb-3 ${
                 activeTab === "new"
-                ? "border-b-2 border-yellow-500 "
+                ? "border-b-2 border-yellow-500"
                 : "text-gray-500 hover:text-yellow-500"
             }`}
             >
@@ -48,22 +51,22 @@ function Listings() {
             onClick={() => setActiveTab("change")}
             className={`pb-3 ${
                 activeTab === "change"
-                ? "border-b-2 border-yellow-500 "
+                ? "border-b-2 border-yellow-500"
                 : "text-gray-500 hover:text-yellow-500"
             }`}
             >
-            Change Requests
+            Change Requests (0)
             </button>
 
             <button
             onClick={() => setActiveTab("published")}
             className={`pb-3 ${
                 activeTab === "published"
-                ? "border-b-2 border-yellow-500 "
+                ? "border-b-2 border-yellow-500"
                 : "text-gray-500 hover:text-yellow-500"
             }`}
             >
-            Published
+            Published (0)
             </button>
 
         </div>
@@ -75,7 +78,7 @@ function Listings() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search Machine Name or Order ID"
+          placeholder="Search machine name or order ID"
           className="w-80 border border-gray-300 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-yellow-500"
           />
 
