@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 
 function ImageGallery({ type = "Excavator" }) {
   const [mainLoaded, setMainLoaded] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const images = [
     "https://images.unsplash.com/photo-1599707254554-027aeb4deacd?w=1200",
@@ -17,27 +18,34 @@ function ImageGallery({ type = "Excavator" }) {
   const machineType = type;
 
   useEffect(() => {
-    setMainLoaded(false);
+    if (isNavigating) {
+      setMainLoaded(false);
+      setIsNavigating(false);
+    }
   }, [activeImage]);
 
-    const nextImage = () => {
-        setCurrentIndex((prev) =>
-            prev === images.length - 1 ? 0 : prev + 1
-        );
-    };
+  const nextImage = () => {
+    setIsNavigating(true);
+    setCurrentIndex((prev) =>
+      prev === images.length - 1 ? 0 : prev + 1
+    );
+  };
 
-    const prevImage = () => {
-        setCurrentIndex((prev) =>
-            prev === 0 ? images.length - 1 : prev - 1
-        );
-    };
+  const prevImage = () => {
+    setIsNavigating(true);
+    setCurrentIndex((prev) =>
+      prev === 0 ? images.length - 1 : prev - 1
+    );
+  };
 
   return (
     <div className="mt-8">
 
       {/* Main Image */}
       <div className="group relative overflow-hidden rounded-2xl border border-gray-200">
-        {!mainLoaded && (
+
+        {/* Only show loading overlay when user navigated and image hasn't loaded yet */}
+        {isNavigating && !mainLoaded && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-gray-100/90 text-gray-500">
             Loading image...
           </div>
@@ -50,7 +58,9 @@ function ImageGallery({ type = "Excavator" }) {
           loading="lazy"
           onLoad={() => setMainLoaded(true)}
           onError={() => setMainLoaded(true)}
-          className={`w-full h-[500px] object-cover transition-opacity duration-500 ${mainLoaded ? "opacity-100" : "opacity-0"}`}
+          className={`w-full h-[500px] object-cover transition-opacity duration-500 ${
+            isNavigating && !mainLoaded ? "opacity-0" : "opacity-100"
+          }`}
         />
 
         {/* Machine type badge */}
@@ -104,30 +114,27 @@ function ImageGallery({ type = "Excavator" }) {
 
       {/* Thumbnails */}
       <div className="flex gap-4 mt-4">
-
         {images.map((image, index) => (
-
           <button
             key={index}
-            onClick={() => setCurrentIndex(index)}
+            onClick={() => {
+              setIsNavigating(true);
+              setCurrentIndex(index);
+            }}
             className={`w-full overflow-hidden rounded-xl border-2 transition-all ${
               currentIndex === index
                 ? "border-yellow-500"
                 : "border-transparent"
             }`}
           >
-
             <img
               src={image}
               alt={`${machineType} thumbnail ${index + 1}`}
               loading="lazy"
               className="w-full h-24 object-cover hover:scale-105 transition-transform duration-200"
             />
-
           </button>
-
         ))}
-
       </div>
 
       <div className="py-4 flex flex-col gap-2">
@@ -135,9 +142,8 @@ function ImageGallery({ type = "Excavator" }) {
           About this machine
         </p>
         <p className="text-xs text-gray-400">
-            Well-maintained Caterpillar 320 GX hydraulic rxacavator available for short and long term rental in Mumbai and surrounding regions. Ideal for deep exacavation, foundation work, and demolition. Operator available on request at additional cost.
+          Well-maintained Caterpillar 320 GX hydraulic excavator available for short and long term rental in Mumbai and surrounding regions. Ideal for deep excavation, foundation work, and demolition. Operator available on request at additional cost.
         </p>
-    
       </div>
 
     </div>
