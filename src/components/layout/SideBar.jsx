@@ -1,4 +1,10 @@
+import { NavLink, useLocation } from "react-router-dom";
+import { listings } from "../../data/listings";
+
 function Sidebar() {
+  const { pathname } = useLocation();
+  const onboardingActive = pathname === "/" || pathname.startsWith("/product");
+
   return (
     <div className="w-64 h-screen bg-linear-to-br from-zinc-900 via-zinc-900 to-slate-50 text-white flex flex-col">
 
@@ -14,28 +20,107 @@ function Sidebar() {
         </p>
 
         <ul>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Onboarding
+          <li>
+            <NavLink
+              to="/"
+              className={
+                onboardingActive
+                  ? "block px-4 py-2 rounded-lg mb-2 text-yellow-500 border border-yellow-500"
+                  : "block px-4 py-2 rounded-lg mb-2 text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+              }
+            >
+              <span className="flex items-center justify-between gap-2">
+                <span>Onboarding</span>
+                <span className="inline-flex h-6 min-w-[24px] items-center justify-center rounded-full bg-yellow-500 px-2 text-xs font-semibold text-black">
+                  {listings.length}
+                </span>
+              </span>
+            </NavLink>
           </li>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Bookings
+          <li>
+            <NavLink
+              to="/bookings"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg mb-2 ${
+                  isActive
+                    ? "text-yellow-500 border border-yellow-500"
+                    : "text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+                }`
+              }
+            >
+              Bookings
+            </NavLink>
           </li>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Revenue
+          <li>
+            <NavLink
+              to="/revenue"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg mb-2 ${
+                  isActive
+                    ? "text-yellow-500 border border-yellow-500"
+                    : "text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+                }`
+              }
+            >
+              Revenue
+            </NavLink>
           </li>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Commission 
+          <li>
+            <NavLink
+              to="/commission"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg mb-2 ${
+                  isActive
+                    ? "text-yellow-500 border border-yellow-500"
+                    : "text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+                }`
+              }
+            >
+              Commission
+            </NavLink>
           </li>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Team 
+          <li>
+            <NavLink
+              to="/team"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg mb-2 ${
+                  isActive
+                    ? "text-yellow-500 border border-yellow-500"
+                    : "text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+                }`
+              }
+            >
+              Team
+            </NavLink>
           </li>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Payout 
+          <li>
+            <NavLink
+              to="/payout"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg mb-2 ${
+                  isActive
+                    ? "text-yellow-500 border border-yellow-500"
+                    : "text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+                }`
+              }
+            >
+              Payout
+            </NavLink>
           </li>
-          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
-            Audit Logs 
+          <li>
+            <NavLink
+              to="/audit-logs"
+              className={({ isActive }) =>
+                `block px-4 py-2 rounded-lg mb-2 ${
+                  isActive
+                    ? "text-yellow-500 border border-yellow-500"
+                    : "text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
+                }`
+              }
+            >
+              Audit Logs
+            </NavLink>
           </li>
-
         </ul>
       </div>
 
@@ -56,7 +141,7 @@ function Sidebar() {
             </p>
           </div>
         </div>
-        </div>
+      </div>
 
     </div>
   );

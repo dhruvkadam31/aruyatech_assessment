@@ -1,5 +1,6 @@
 import Sidebar from "../components/layout/SideBar";
 import Listing from "./Listings";
+import {Outlet} from "react-router-dom";
 
 function Dashboard() {
   return (
@@ -17,7 +18,7 @@ function Dashboard() {
           </p>
         </div>
 
-          <Listing/>
+          <Outlet />
       </div>
 
     </div>

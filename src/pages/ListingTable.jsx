@@ -1,59 +1,9 @@
 import Tooltip from '../components/ui/Tooltip';
+import { useNavigate } from 'react-router-dom';
+import { listings } from '../data/listings';
 
 function ListingsTable() {
-  const listings = [
-  {
-    id: 1,
-    machine: "CAT 320 Hydraulic Excavator",
-    type: "Excavator",
-    vendor: "Ramesh Sharma",
-    phone: "+91 9876543210",
-    location: "Madhya Pradesh",
-    pincode: "480070",
-    ppm: "₹2,00,190",
-    pps: "₹20,190",
-    submitted: "Today",
-  },
-
-  {
-    id: 2,
-    machine: "CAT 320 Hydraulic Excavator",
-    type: "Excavator",
-    vendor: "Krishna Kumar Palliyadali",
-    phone: "+91 9876543210",
-    location: "Mumbai",
-    pincode: "480001",
-    ppm: "₹2,00,190",
-    pps: "₹20,190",
-    submitted: "1 day ago",
-  },
-
-  {
-    id: 3,
-    machine: "CAT 320 Hydraulic Excavator",
-    type: "Excavator",
-    vendor: "Giriraj Sahu",
-    phone: "+91 9876543210",
-    location: "Delhi",
-    pincode: "400870",
-    ppm: "₹2,00,190",
-    pps: "₹20,190",
-    submitted: "1 day ago",
-  },
-
-  {
-    id: 4,
-    machine: "CAT 320 Hydraulic Excavator",
-    type: "Excavator",
-    vendor: "Kheman Pawar",
-    phone: "+91 9876543210",
-    location: "Pune",
-    pincode: "400070",
-    ppm: "₹2,00,190",
-    pps: "₹20,190",
-    submitted: "2 days ago",
-  },
-];
+  const navigate = useNavigate();
 
   return (
     <div className="mt-6 bg-white border border-gray-200 rounded-xl shadow-sm overflow-visible">
@@ -181,7 +131,15 @@ function ListingsTable() {
                     <div className="flex gap-2">
 
                         {/* View */}
-                        <button className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200">
+                        <button
+                            onClick={() => navigate("/product", {
+                              state: {
+                                name: item.vendor,
+                                shopName: item.shopName,
+                                phone: item.phone,
+                              },
+                            })}
+                            className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200">
                         👁
                         </button>
 
