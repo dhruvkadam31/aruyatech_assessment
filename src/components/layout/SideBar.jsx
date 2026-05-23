@@ -26,6 +26,16 @@ function Sidebar() {
           <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
             Commission 
           </li>
+          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
+            Team 
+          </li>
+          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
+            Payout 
+          </li>
+          <li className="text-gray-300 px-4 py-2 rounded-lg hover:text-yellow-500 hover:border hover:border-yellow-500 cursor-pointer mb-2">
+            Audit Logs 
+          </li>
+
         </ul>
       </div>
 
