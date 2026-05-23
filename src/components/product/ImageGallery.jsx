@@ -38,17 +38,19 @@ function ImageGallery({ type = "Excavator" }) {
       {/* Main Image */}
       <div className="group relative overflow-hidden rounded-2xl border border-gray-200">
         {!mainLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center bg-gray-100/90 text-gray-500">
+          <div className="absolute inset-0 z-20 flex items-center justify-center bg-gray-100/90 text-gray-500">
             Loading image...
           </div>
         )}
 
         <img
+          key={activeImage}
           src={activeImage}
           alt={`${machineType} - image ${currentIndex + 1}`}
           loading="lazy"
           onLoad={() => setMainLoaded(true)}
-          className="w-full h-[500px] object-cover"
+          onError={() => setMainLoaded(true)}
+          className={`w-full h-[500px] object-cover transition-opacity duration-500 ${mainLoaded ? "opacity-100" : "opacity-0"}`}
         />
 
         {/* Machine type badge */}
