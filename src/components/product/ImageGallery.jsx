@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 
 function ImageGallery({ type = "Excavator" }) {
+  const [mainLoaded, setMainLoaded] = useState(false);
 
   const images = [
     "https://images.unsplash.com/photo-1599707254554-027aeb4deacd?w=1200",
@@ -14,6 +15,10 @@ function ImageGallery({ type = "Excavator" }) {
   const [zoomOpen, setZoomOpen] = useState(false);
   const activeImage = images[currentIndex];
   const machineType = type;
+
+  useEffect(() => {
+    setMainLoaded(false);
+  }, [activeImage]);
 
     const nextImage = () => {
         setCurrentIndex((prev) =>
@@ -32,9 +37,17 @@ function ImageGallery({ type = "Excavator" }) {
 
       {/* Main Image */}
       <div className="group relative overflow-hidden rounded-2xl border border-gray-200">
+        {!mainLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-100/90 text-gray-500">
+            Loading image...
+          </div>
+        )}
+
         <img
           src={activeImage}
-          alt="machine"
+          alt={`${machineType} - image ${currentIndex + 1}`}
+          loading="lazy"
+          onLoad={() => setMainLoaded(true)}
           className="w-full h-[500px] object-cover"
         />
 
@@ -104,7 +117,8 @@ function ImageGallery({ type = "Excavator" }) {
 
             <img
               src={image}
-              alt="thumbnail"
+              alt={`${machineType} thumbnail ${index + 1}`}
+              loading="lazy"
               className="w-full h-24 object-cover hover:scale-105 transition-transform duration-200"
             />
 

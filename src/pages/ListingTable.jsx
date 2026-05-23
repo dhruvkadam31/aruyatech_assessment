@@ -117,8 +117,9 @@ function ListingsTable({ searchQuery = "" }) {
                     <div className="flex items-center gap-3">
                       <img
                         src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=200"
-                        alt="machine"
-                        className="w-12 h-10 rounded-md object-cover"
+                        alt={`Machine photo for ${item.machine}`}
+                        loading="lazy"
+                        className="w-12 h-10 rounded-md object-cover bg-gray-100"
                       />
                       <div>
                         {item.machine}
