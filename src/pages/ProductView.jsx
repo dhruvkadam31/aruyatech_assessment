@@ -1,13 +1,19 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { ChevronLeft } from "lucide-react";
 import ProductHeader from "../components/product/ProductHeader";
 import PricingCard from "../components/product/PricingCard";
 import ImageGallery from "../components/product/ImageGallery";
 import VendorInfo from "../components/product/VendorInfo";
 import InfoCard from "../components/product/InfoCard";
+import ReviewModal from "../components/product/ReviewModal";
 
 function ProductView() {
   const location = useLocation();
-  const { name, phone, shopName } = location.state || {};
+  const { name, phone, shopName, type, title } = location.state || {};
+  const [reviewOpen, setReviewOpen] = useState(false);
+  const [reviewType, setReviewType] = useState("approve");
+
   const documents = [
   { docName: "PAN Card", status: "yes" },
   { docName: "RC (Registration Certificate)", status: "yes" },
@@ -15,20 +21,44 @@ function ProductView() {
   { docName: "GST Certificate", status: "yes" },
 ];
 
+  const openReview = (type) => {
+    setReviewType(type);
+    setReviewOpen(true);
+  };
+
+  const closeReview = () => {
+    setReviewOpen(false);
+  };
+
+  const handleReviewConfirm = (reason) => {
+    console.log(`${reviewType === "reject" ? "Rejected" : "Approved"} product view`, {
+      title,
+      reason,
+    });
+    closeReview();
+  };
+
   return (
     <div className="p-6">
 
       {/* Breadcrumb */}
-      <p className="text-sm text-gray-400">
-        ← New Listings / Excavator
-      </p>
+      <div className="text-sm text-gray-400 flex items-center gap-2">
+        <Link to="/" className="inline-flex items-center gap-2 hover:text-gray-200">
+          <ChevronLeft className="w-4 h-4" />
+          New Listings
+        </Link>
+        <span className="mx-2 text-gray-300 font-medium">/</span>
+        <span className="font-bold text-black">{type || "Excavator"}</span>
+      </div>
 
       {/* Header */}
       <ProductHeader
-        title="CAT 320 Hydraulic Excavator"
-        type="Excavator"
+        title={title || "CAT 320 Hydraulic Excavator"}
+        type={type || "Excavator"}
         year="2022"
         location="Mumbai, Maharashtra"
+        onApprove={() => openReview("approve")}
+        onReject={() => openReview("reject")}
       />
 
       {/* Pricing Cards */}
@@ -45,18 +75,26 @@ function ProductView() {
         />
 
       </div>
-      <ImageGallery />
+      <ImageGallery type={type || "Excavator"} />
       <VendorInfo
         name={name || "Admin User"}
         shopName={shopName || "Shop Name"}
         phone={phone || "+91 9876543210"}
       />
 
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-3">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-3 auto-rows-fr">
         {documents.map((doc, index) => (
             <InfoCard key={index} docName={doc.docName} status={doc.status} />
         ))}
-        </div>
+      </div>
+
+      <ReviewModal
+        isOpen={reviewOpen}
+        onClose={closeReview}
+        type={reviewType}
+        item={{ machine: title, vendor: name, shopName, phone }}
+        onConfirm={handleReviewConfirm}
+      />
 
     </div>
   );

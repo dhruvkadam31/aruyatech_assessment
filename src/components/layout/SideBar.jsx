@@ -1,4 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Calendar,
+  BarChart3,
+  Percent,
+  Users,
+  Wallet,
+  FileText,
+} from "lucide-react";
 import { listings } from "../../data/listings";
 
 function Sidebar() {
@@ -6,7 +15,7 @@ function Sidebar() {
   const onboardingActive = pathname === "/" || pathname.startsWith("/product");
 
   return (
-    <div className="w-64 h-screen bg-linear-to-br from-zinc-900 via-zinc-900 to-slate-50 text-white flex flex-col">
+    <div className="w-64 h-screen bg-gradient-to-b from-[#0b0f10] via-[#2b241f] to-[#1b1b1b] text-white flex flex-col shadow-xl">
 
       <div className="p-6 border-b border-gray-700">
         <h1 className="text-xl font-bold">
@@ -25,13 +34,16 @@ function Sidebar() {
               to="/"
               className={
                 onboardingActive
-                  ? "block px-4 py-2 rounded-lg mb-2 text-yellow-500 border border-yellow-500"
+                  ? "block px-4 py-2 rounded-lg mb-2 text-yellow-500 border border-yellow-500 bg-gradient-to-r from-[#0b0f10] to-transparent p-6 rounded-xl text-white"
                   : "block px-4 py-2 rounded-lg mb-2 text-gray-300 hover:text-yellow-500 hover:border hover:border-yellow-500"
               }
             >
               <span className="flex items-center justify-between gap-2">
-                <span>Onboarding</span>
-                <span className="inline-flex h-6 min-w-[24px] items-center justify-center rounded-full bg-yellow-500 px-2 text-xs font-semibold text-black">
+                <span className="flex items-center gap-3">
+                  <LayoutDashboard className="w-4 h-4" />
+                  <span>Onboarding</span>
+                </span>
+                <span className="inline-flex h-6 min-w-[24px] items-center justify-center rounded-full bg-red-500 px-2 text-xs font-semibold text-white">
                   {listings.length}
                 </span>
               </span>
@@ -48,7 +60,10 @@ function Sidebar() {
                 }`
               }
             >
-              Bookings
+              <span className="flex items-center gap-3">
+                <Calendar className="w-4 h-4" />
+                <span>Bookings</span>
+              </span>
             </NavLink>
           </li>
           <li>
@@ -62,7 +77,10 @@ function Sidebar() {
                 }`
               }
             >
-              Revenue
+              <span className="flex items-center gap-3">
+                <BarChart3 className="w-4 h-4" />
+                <span>Revenue</span>
+              </span>
             </NavLink>
           </li>
           <li>
@@ -76,7 +94,10 @@ function Sidebar() {
                 }`
               }
             >
-              Commission
+              <span className="flex items-center gap-3">
+                <Percent className="w-4 h-4" />
+                <span>Commission</span>
+              </span>
             </NavLink>
           </li>
           <li>
@@ -90,7 +111,10 @@ function Sidebar() {
                 }`
               }
             >
-              Team
+              <span className="flex items-center gap-3">
+                <Users className="w-4 h-4" />
+                <span>Team</span>
+              </span>
             </NavLink>
           </li>
           <li>
@@ -104,7 +128,10 @@ function Sidebar() {
                 }`
               }
             >
-              Payout
+              <span className="flex items-center gap-3">
+                <Wallet className="w-4 h-4" />
+                <span>Payout</span>
+              </span>
             </NavLink>
           </li>
           <li>
@@ -118,7 +145,10 @@ function Sidebar() {
                 }`
               }
             >
-              Audit Logs
+              <span className="flex items-center gap-3">
+                <FileText className="w-4 h-4" />
+                <span>Audit Logs</span>
+              </span>
             </NavLink>
           </li>
         </ul>

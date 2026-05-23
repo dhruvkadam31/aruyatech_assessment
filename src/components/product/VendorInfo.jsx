@@ -1,3 +1,5 @@
+import { Building2, Phone } from "lucide-react";
+
 function VendorInfo({
   name,
   shopName,
@@ -19,8 +21,16 @@ function VendorInfo({
               {name || "Vendor Name"}
             </p>
             <div className="flex flex-wrap items-center gap-4 text-sm text-gray-400">
-              {phone && <span>{phone}</span>}
-              <span>{shopName || "Shop Name"}</span>
+              {phone && (
+                <span className="inline-flex items-center gap-2">
+                  <Phone className="w-4 h-4" />
+                  {phone}
+                </span>
+              )}
+              <span className="inline-flex items-center gap-2">
+                <Building2 className="w-4 h-4" />
+                {shopName || "Shop Name"}
+              </span>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
-function ActionButton({ text, color }) {
+function ActionButton({ text, color, onClick }) {
   return (
     <button
+      onClick={onClick}
       className={`
         px-5 py-2 rounded-full border text-sm font-medium
         ${

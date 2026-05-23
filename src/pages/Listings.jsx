@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { Search, RefreshCcw } from "lucide-react";
 import ListingTable from "./ListingTable";
+import PlaceholderPage from "./PlaceholderPage";
+import { listings } from "../data/listings";
 
 function Listings() {
-
- const [activeTab, setActiveTab] = useState("new");
+  const [activeTab, setActiveTab] = useState("new");
+  const [search, setSearch] = useState("");
 
   return (
     <div className="px-4">
@@ -19,8 +22,9 @@ function Listings() {
           </p>
         </div>
 
-        <button className="text-purple-600 text-sm font-medium hover:text-purple-800 whitespace-nowrap">
-          ⟳ Refresh
+        <button className="flex items-center gap-2 text-purple-600 text-sm font-medium hover:text-purple-800 whitespace-nowrap">
+          <RefreshCcw className="w-4 h-4" />
+          Refresh
         </button>
       </div>
 
@@ -37,7 +41,7 @@ function Listings() {
                 : "text-gray-500 hover:text-yellow-500"
             }`}
             >
-            New Listings
+            New Listings ({listings.length})
             </button>
 
             <button
@@ -67,23 +71,25 @@ function Listings() {
         {/* Search */}
         <div className="relative mb-2">
 
-            <input
-            type="text"
-            placeholder="Search Machine Name or Order ID"
-            className="w-80 border border-gray-300 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-yellow-500"
-            />
+          <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search Machine Name or Order ID"
+          className="w-80 border border-gray-300 rounded-lg py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-yellow-500"
+          />
 
-            <span className="absolute left-3 top-2 text-gray-400">
-            🔍
-            </span>
+          <span className="absolute left-3 top-2 text-gray-400">
+            <Search className="w-4 h-4" />
+          </span>
 
         </div>
 
-        
-
    </div>
 
-        <ListingTable />
+        {activeTab === "new" && <ListingTable searchQuery={search} />}
+        {activeTab === "change" && <PlaceholderPage title="Change Requests" />}
+        {activeTab === "published" && <PlaceholderPage title="Published" />}
   </div>
 
 

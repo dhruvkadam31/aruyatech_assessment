@@ -1,6 +1,7 @@
+import { CalendarDays, MapPin } from "lucide-react";
 import ActionButton from "./ActionButton";
 
-function ProductHeader({ title, type, year, location }) {
+function ProductHeader({ title, type, year, location, onApprove, onReject }) {
   return (
     <div className="flex justify-between items-start mt-4">
 
@@ -15,9 +16,15 @@ function ProductHeader({ title, type, year, location }) {
 
           <span>{type}</span>
 
-          <span>Year: {year}</span>
+          <span className="inline-flex items-center gap-2">
+            <CalendarDays className="w-4 h-4" />
+            Year: {year}
+          </span>
 
-          <span>{location}</span>
+          <span className="inline-flex items-center gap-2">
+            <MapPin className="w-4 h-4" />
+            {location}
+          </span>
 
         </div>
 
@@ -29,11 +36,13 @@ function ProductHeader({ title, type, year, location }) {
         <ActionButton
           text="✓ Approve"
           color="green"
+          onClick={onApprove}
         />
 
         <ActionButton
           text="✕ Reject"
           color="red"
+          onClick={onReject}
         />
 
       </div>
